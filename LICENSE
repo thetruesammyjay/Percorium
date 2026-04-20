@@ -1,0 +1,41 @@
+MIT License
+
+Copyright (c) 2026 Percorium / thetruesammyjay
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+DISCLAIMER
+
+Percorium is experimental software currently deployed on Solana Devnet only.
+It has not been audited for mainnet use. The authors make no representations
+or warranties as to the security, reliability, or fitness of this software for
+any purpose. Use of this software in production environments or with real funds
+is at your own risk.
+
+Percorium provides synthetic price exposure to indices and assets. Users do not
+acquire ownership, voting rights, dividends, or any claim to underlying assets.
+Percorium is not a securities broker, investment adviser, or regulated financial
+institution. Nothing in this software or its documentation constitutes financial
+or investment advice.
+
+Integration with third-party protocols (Jupiter, Kamino, Switchboard, Jito,
+Encrypt Protocol, Palm USD, xStocks.fi) is provided as-is. The authors are not
+responsible for failures, exploits, or losses arising from those integrations.
