@@ -1,4 +1,4 @@
-# CONTEXT.md — Percorium Builder Context
+﻿# CONTEXT.md — Percorium Builder Context
 
 > **Purpose:** This file is the canonical context document for any AI assistant, contributor, or LLM helping build Percorium. Read this before writing a single line of code. It contains the full mental model, design rationale, constraint boundaries, and decision history behind every architectural choice.
 
@@ -403,8 +403,8 @@ For the Colosseum submission, build in this exact order:
 - [ ] All 12 test files passing
 
 **Bounty unlock criteria:**
-- Encrypt track: FHE-encrypted user positions + trade history on-chain ✅
-- Palm USD track: Palm USD as primary collateral + unit of account throughout ✅
+- Encrypt track: FHE-encrypted user positions + trade history on-chain 
+- Palm USD track: Palm USD as primary collateral + unit of account throughout 
 
 ---
 

@@ -1,4 +1,4 @@
-# Percorium 
+﻿# Percorium 
 ### The Sovereign On-Chain Layer for Synthetic Indices
 
 > **Percolator** (Solana's financial engine) + **Emporium** (Market) = **Percorium**
@@ -55,37 +55,37 @@ Percorium exists to solve three problems that no current DeFi protocol addresses
 
 ```mermaid
 graph TB
-    User["👤 User / Trader"]
-    LP["💰 Liquidity Provider"]
-    Creator["🧠 Index Creator"]
+    User["User / Trader"]
+    LP["Liquidity Provider"]
+    Creator["Index Creator"]
 
-    subgraph Percorium["🏛️ Percorium Protocol"]
+    subgraph Percorium["Percorium Protocol"]
         direction TB
-        Frontend["🖥️ Frontend UI\n(Next.js + Wallet Adapter)"]
+        Frontend["Frontend UI\n(Next.js + Wallet Adapter)"]
         
         subgraph OnChain["On-Chain Programs (Anchor / Solana)"]
-            GHV["🏦 Global House Vault\n($xPalmUSD)"]
-            Insurance["🛡️ Insurance Fund PDA\n(Cold Storage)"]
+            GHV["Global House Vault\n($xPalmUSD)"]
+            Insurance["Insurance Fund PDA\n(Cold Storage)"]
             
             subgraph Slabs["Isolated Risk Slabs (PDAs)"]
-                Slab1["📊 Slab: SP500-Index\nSPYx + QQQx + Crypto"]
-                Slab2["📊 Slab: Custom-Basket\nUp to 10 assets"]
-                Slab3["📊 Slab: Nasdaq100-5x\nLeveraged Perp"]
+                Slab1["Slab: SP500-Index\nSPYx + QQQx + Crypto"]
+                Slab2["Slab: Custom-Basket\nUp to 10 assets"]
+                Slab3["Slab: Nasdaq100-5x\nLeveraged Perp"]
             end
             
-            PerpEngine["⚙️ Perp Engine\n5x Leverage + Funding"]
-            FHELayer["🔐 Encrypt FHE Layer\nConfidential Positions"]
+            PerpEngine["Perp Engine\n5x Leverage + Funding"]
+            FHELayer["Encrypt FHE Layer\nConfidential Positions"]
         end
     end
 
     subgraph ExternalStack["External Protocol Stack"]
-        PalmUSD["🌴 Palm USD\nStablecoin Collateral"]
-        Encrypt["🔒 Encrypt Protocol\nFHE On-Chain State"]
-        Jito["⚡ Jito Bundles\nAtomic Execution"]
-        Jupiter["🪐 Jupiter CPI\nPhysical Hedging"]
-        Switchboard["🔮 Switchboard V3 TEE\nMulti-Source Oracle"]
-        Kamino["📈 Kamino V2\nIdle Yield Stacking"]
-        xStocks["📈 xStocks.fi\nSPYx / QQQx Tokens"]
+        PalmUSD["Palm USD\nStablecoin Collateral"]
+        Encrypt["Encrypt Protocol\nFHE On-Chain State"]
+        Jito["Jito Bundles\nAtomic Execution"]
+        Jupiter["Jupiter CPI\nPhysical Hedging"]
+        Switchboard["Switchboard V3 TEE\nMulti-Source Oracle"]
+        Kamino["Kamino V2\nIdle Yield Stacking"]
+        xStocks["xStocks.fi\nSPYx / QQQx Tokens"]
     end
 
     User -->|"Swap → Palm USD"| Frontend
@@ -110,7 +110,7 @@ graph TB
 
 ```mermaid
 graph LR
-    subgraph Hub["🏦 Global Hub (House)"]
+    subgraph Hub["Global Hub (House)"]
         direction TB
         Vault["$xPalmUSD Vault\n(LP Deposits)"]
         Kamino2["Kamino V2\nIdle Yield"]
@@ -123,19 +123,19 @@ graph LR
         Treasury --> InsurancePDA
     end
 
-    subgraph SlabA["🧱 Slab A: SP500-Index"]
+    subgraph SlabA["Slab A: SP500-Index"]
         WeightsA["Weights: SPYx(40%)\nQQQx(30%) SOL(20%) BTC(10%)"]
         OI_A["OI Cap: 50% Spot TVL"]
         Debt_A["Debt Ceiling: 500k Palm USD"]
     end
 
-    subgraph SlabB["🧱 Slab B: Custom Basket"]
+    subgraph SlabB["Slab B: Custom Basket"]
         WeightsB["Weights: Custom\nUp to 10 assets"]
         OI_B["OI Cap: 50% Spot TVL"]
         Debt_B["Debt Ceiling: Custom"]
     end
 
-    subgraph SlabC["🧱 Slab C: Nasdaq100-5x"]
+    subgraph SlabC["Slab C: Nasdaq100-5x"]
         WeightsC["QQQx(60%) NVDAx(20%)\nAAPLx(20%)"]
         OI_C["OI Cap: 50% Spot TVL"]
         Debt_C["Leverage: 5x Max"]
@@ -181,7 +181,7 @@ sequenceDiagram
     JitoBundle->>EncryptFHE: encrypt_position(user_pubkey, balance, history)
     EncryptFHE-->>PercoriumProgram: Encrypted position PDA updated
     
-    PercoriumProgram-->>User: Synthetic ETF tokens minted ✅
+    PercoriumProgram-->>User: Synthetic ETF tokens minted 
     
     Note over JitoBundle: If ANY tx fails → entire bundle reverts
 ```
@@ -192,20 +192,20 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    subgraph Sources["📡 Multi-Source Price Feeds"]
+    subgraph Sources["Multi-Source Price Feeds"]
         Pyth["Pyth Network"]
         Chainlink["Chainlink"]
         DEX["DEX TWAP\n(Raydium / Orca)"]
     end
 
-    subgraph TEE["🔐 Switchboard V3 TEE Function"]
+    subgraph TEE["Switchboard V3 TEE Function"]
         Pull["Pull all 3 sources"]
         Outlier["Discard outliers\n(>2% deviation threshold)"]
         Circuit["Circuit Breaker\n(>2 sources disagree → PAUSE)"]
         NAV["Compute real-time NAV\nfor each Slab"]
     end
 
-    subgraph Output["📤 On-Chain Result"]
+    subgraph Output["On-Chain Result"]
         OracleAccount["Oracle PDA\n(verified TEE result)"]
         SlabNAV["Slab NAV updated\n(every ~400ms)"]
         Pause["Slab PAUSED\n(circuit breaker)"]
@@ -216,8 +216,8 @@ graph TD
     DEX --> Pull
     Pull --> Outlier
     Outlier --> Circuit
-    Circuit -->|"Consensus ✅"| NAV
-    Circuit -->|"Disagreement ❌"| Pause
+    Circuit -->|"Consensus "| NAV
+    Circuit -->|"Disagreement "| Pause
     NAV --> OracleAccount
     OracleAccount --> SlabNAV
 ```
@@ -228,7 +228,7 @@ graph TD
 
 ```mermaid
 graph LR
-    subgraph PerpEngine["⚙️ Perp Engine (Per Slab)"]
+    subgraph PerpEngine["Perp Engine (Per Slab)"]
         OI["Open Interest Tracker\n(Long OI / Short OI)"]
         Skew["Skew = (LongOI - ShortOI)\n/ TotalOI"]
         Funding["Funding Rate\nfr = K × Skew"]
@@ -236,12 +236,12 @@ graph LR
         AK["A/K Scaling\n(Socialized Haircut)"]
     end
 
-    subgraph UserPositions["👤 User Positions (FHE Encrypted)"]
+    subgraph UserPositions["User Positions (FHE Encrypted)"]
         Long["Long Position\nuPnL = (CurrentNAV - EntryNAV) × Size"]
         Short["Short Position\nuPnL = (EntryNAV - CurrentNAV) × Size"]
     end
 
-    subgraph RiskGates["🚦 Risk Gates"]
+    subgraph RiskGates["Risk Gates"]
         Cap["50% OI Cap\nvs Spot TVL"]
         Throttle["Dynamic Leverage Throttle\n(bias > 60% → max 3x)"]
         ADL["Socialized ADL\n(Drift model)"]
@@ -262,14 +262,14 @@ graph LR
 
 ```mermaid
 graph TD
-    Fees["💵 Protocol Fees\n(Trading + Funding)"]
+    Fees["Protocol Fees\n(Trading + Funding)"]
     
-    Fees -->|"65%"| Treasury["🏛️ Protocol Treasury\n(R&D + Operations)"]
-    Fees -->|"20%"| Creator["🧠 Index Creator Royalty\n(Direct incentive)"]
-    Fees -->|"15%"| LP["💰 LP Rewards\n($xPalmUSD holders)"]
+    Fees -->|"65%"| Treasury["Protocol Treasury\n(R&D + Operations)"]
+    Fees -->|"20%"| Creator["Index Creator Royalty\n(Direct incentive)"]
+    Fees -->|"15%"| LP["LP Rewards\n($xPalmUSD holders)"]
     
-    Treasury -->|"20% of Treasury"| InsuranceFund["🛡️ Cold Storage\nInsurance Fund"]
-    Treasury -->|"80% of Treasury"| Ops["📋 Operations\n(Dev + R&D + Marketing)"]
+    Treasury -->|"20% of Treasury"| InsuranceFund["Cold Storage\nInsurance Fund"]
+    Treasury -->|"80% of Treasury"| Ops["Operations\n(Dev + R&D + Marketing)"]
 ```
 
 ---
@@ -426,226 +426,226 @@ Percorium uses a **Monorepo architecture** managed via `pnpm` workspaces. The re
 ```
 Percorium/
 │
-├── 📄 README.md                          # This file
-├── 📄 CONTEXT.md                         # Builder context and AI prompt guide
-├── 📄 SECURITY.md                        # Security policy and bug bounty
-├── 📄 LICENSE
-├── 📄 package.json                       # Root pnpm workspace config
-├── 📄 pnpm-workspace.yaml               # Workspace package declarations
-├── 📄 turbo.json                         # Turborepo pipeline config
-├── 📄 .gitignore
-├── 📄 .env.example                       # Environment variable template
+├── README.md                          # This file
+├── CONTEXT.md                         # Builder context and AI prompt guide
+├── SECURITY.md                        # Security policy and bug bounty
+├── LICENSE
+├── package.json                       # Root pnpm workspace config
+├── pnpm-workspace.yaml               # Workspace package declarations
+├── turbo.json                         # Turborepo pipeline config
+├── .gitignore
+├── .env.example                       # Environment variable template
 │
-├── 📁 programs/                          # Solana Anchor Programs
-│   └── 📁 percoria/                      # Main on-chain program
-│       ├── 📄 Anchor.toml                # Anchor config (devnet cluster)
-│       ├── 📄 Cargo.toml                 # Rust dependencies
-│       ├── 📄 Cargo.lock
-│       └── 📁 src/
-│           ├── 📄 lib.rs                 # Program entrypoint + instruction routing
+├── programs/                          # Solana Anchor Programs
+│   └── percoria/                      # Main on-chain program
+│       ├── Anchor.toml                # Anchor config (devnet cluster)
+│       ├── Cargo.toml                 # Rust dependencies
+│       ├── Cargo.lock
+│       └── src/
+│           ├── lib.rs                 # Program entrypoint + instruction routing
 │           │
-│           ├── 📁 state/                 # All on-chain account structs (PDAs)
-│           │   ├── 📄 mod.rs
-│           │   ├── 📄 global_vault.rs    # GlobalVaultState PDA
-│           │   ├── 📄 slab.rs            # SlabAccount PDA (per index)
-│           │   ├── 📄 user_position.rs   # UserPosition PDA (FHE encrypted)
-│           │   ├── 📄 lp_deposit.rs      # LpDepositAccount PDA (cooldown)
-│           │   ├── 📄 insurance_fund.rs  # InsuranceFundAccount PDA
-│           │   ├── 📄 oracle_feed.rs     # OracleFeedAccount (Switchboard)
-│           │   └── 📄 perp_position.rs   # PerpPositionAccount PDA
+│           ├── state/                 # All on-chain account structs (PDAs)
+│           │   ├── mod.rs
+│           │   ├── global_vault.rs    # GlobalVaultState PDA
+│           │   ├── slab.rs            # SlabAccount PDA (per index)
+│           │   ├── user_position.rs   # UserPosition PDA (FHE encrypted)
+│           │   ├── lp_deposit.rs      # LpDepositAccount PDA (cooldown)
+│           │   ├── insurance_fund.rs  # InsuranceFundAccount PDA
+│           │   ├── oracle_feed.rs     # OracleFeedAccount (Switchboard)
+│           │   └── perp_position.rs   # PerpPositionAccount PDA
 │           │
-│           ├── 📁 instructions/          # All instruction handlers
-│           │   ├── 📄 mod.rs
+│           ├── instructions/          # All instruction handlers
+│           │   ├── mod.rs
 │           │   │
-│           │   ├── 📁 vault/
-│           │   │   ├── 📄 mod.rs
-│           │   │   ├── 📄 initialize_vault.rs   # Init global house vault
-│           │   │   ├── 📄 deposit_lp.rs          # LP deposit + Kamino yield
-│           │   │   ├── 📄 withdraw_lp.rs         # LP withdraw (24h cooldown)
-│           │   │   └── 📄 harvest_yield.rs       # Kamino yield harvest
+│           │   ├── vault/
+│           │   │   ├── mod.rs
+│           │   │   ├── initialize_vault.rs   # Init global house vault
+│           │   │   ├── deposit_lp.rs          # LP deposit + Kamino yield
+│           │   │   ├── withdraw_lp.rs         # LP withdraw (24h cooldown)
+│           │   │   └── harvest_yield.rs       # Kamino yield harvest
 │           │   │
-│           │   ├── 📁 slab/
-│           │   │   ├── 📄 mod.rs
-│           │   │   ├── 📄 create_slab.rs         # Create new index slab
-│           │   │   ├── 📄 update_slab_config.rs  # Update weights/ceiling
-│           │   │   └── 📄 pause_slab.rs          # Emergency circuit breaker
+│           │   ├── slab/
+│           │   │   ├── mod.rs
+│           │   │   ├── create_slab.rs         # Create new index slab
+│           │   │   ├── update_slab_config.rs  # Update weights/ceiling
+│           │   │   └── pause_slab.rs          # Emergency circuit breaker
 │           │   │
-│           │   ├── 📁 etf/
-│           │   │   ├── 📄 mod.rs
-│           │   │   ├── 📄 mint_etf.rs            # Mint synthetic index token
-│           │   │   └── 📄 redeem_etf.rs          # Redeem ETF → Palm USD
+│           │   ├── etf/
+│           │   │   ├── mod.rs
+│           │   │   ├── mint_etf.rs            # Mint synthetic index token
+│           │   │   └── redeem_etf.rs          # Redeem ETF → Palm USD
 │           │   │
-│           │   ├── 📁 perp/
-│           │   │   ├── 📄 mod.rs
-│           │   │   ├── 📄 open_perp.rs           # Open leveraged position
-│           │   │   ├── 📄 close_perp.rs          # Close + settle PnL
-│           │   │   ├── 📄 settle_funding.rs      # Skew funding rate settlement
-│           │   │   └── 📄 liquidate.rs           # Liquidation handler
+│           │   ├── perp/
+│           │   │   ├── mod.rs
+│           │   │   ├── open_perp.rs           # Open leveraged position
+│           │   │   ├── close_perp.rs          # Close + settle PnL
+│           │   │   ├── settle_funding.rs      # Skew funding rate settlement
+│           │   │   └── liquidate.rs           # Liquidation handler
 │           │   │
-│           │   ├── 📁 oracle/
-│           │   │   ├── 📄 mod.rs
-│           │   │   ├── 📄 update_nav.rs          # Consume Switchboard TEE result
-│           │   │   └── 📄 request_nav.rs         # Request NAV from oracle
+│           │   ├── oracle/
+│           │   │   ├── mod.rs
+│           │   │   ├── update_nav.rs          # Consume Switchboard TEE result
+│           │   │   └── request_nav.rs         # Request NAV from oracle
 │           │   │
-│           │   └── 📁 revenue/
-│           │       ├── 📄 mod.rs
-│           │       ├── 📄 distribute_revenue.rs  # 65/20/15 split logic
-│           │       └── 📄 fund_insurance.rs      # Divert 20% to insurance fund
+│           │   └── revenue/
+│           │       ├── mod.rs
+│           │       ├── distribute_revenue.rs  # 65/20/15 split logic
+│           │       └── fund_insurance.rs      # Divert 20% to insurance fund
 │           │
-│           ├── 📁 math/                   # Pure math library
-│           │   ├── 📄 mod.rs
-│           │   ├── 📄 nav.rs              # NAV calculation
-│           │   ├── 📄 pnl.rs             # uPnL calculation
-│           │   ├── 📄 funding.rs         # Skew-based funding rate
-│           │   ├── 📄 scaling.rs         # A/K socialized haircut
-│           │   └── 📄 leverage.rs        # Dynamic leverage throttle
+│           ├── math/                   # Pure math library
+│           │   ├── mod.rs
+│           │   ├── nav.rs              # NAV calculation
+│           │   ├── pnl.rs             # uPnL calculation
+│           │   ├── funding.rs         # Skew-based funding rate
+│           │   ├── scaling.rs         # A/K socialized haircut
+│           │   └── leverage.rs        # Dynamic leverage throttle
 │           │
-│           ├── 📁 cpi/                    # Cross-Program Invocations
-│           │   ├── 📄 mod.rs
-│           │   ├── 📄 jupiter.rs         # Jupiter swap CPI
-│           │   ├── 📄 kamino.rs          # Kamino deposit/withdraw CPI
-│           │   └── 📄 encrypt.rs         # Encrypt FHE CPI bindings
+│           ├── cpi/                    # Cross-Program Invocations
+│           │   ├── mod.rs
+│           │   ├── jupiter.rs         # Jupiter swap CPI
+│           │   ├── kamino.rs          # Kamino deposit/withdraw CPI
+│           │   └── encrypt.rs         # Encrypt FHE CPI bindings
 │           │
-│           └── 📁 errors/
-│               └── 📄 mod.rs             # Custom Anchor error codes
+│           └── errors/
+│               └── mod.rs             # Custom Anchor error codes
 │
-├── 📁 tests/                             # Anchor test suite (TypeScript)
-│   ├── 📄 package.json
-│   ├── 📄 tsconfig.json
-│   ├── 📁 fixtures/                      # Test data + mock oracle feeds
-│   │   ├── 📄 mock_oracle.ts
-│   │   └── 📄 mock_palm_usd.ts
-│   ├── 📄 01_initialize_vault.test.ts
-│   ├── 📄 02_create_slab.test.ts
-│   ├── 📄 03_mint_etf.test.ts
-│   ├── 📄 04_redeem_etf.test.ts
-│   ├── 📄 05_open_perp.test.ts
-│   ├── 📄 06_close_perp.test.ts
-│   ├── 📄 07_funding_settlement.test.ts
-│   ├── 📄 08_lp_deposit_withdraw.test.ts
-│   ├── 📄 09_revenue_distribution.test.ts
-│   ├── 📄 10_oracle_circuit_breaker.test.ts
-│   ├── 📄 11_ak_scaling.test.ts
-│   └── 📄 12_bundle_simulation.test.ts
+├── tests/                             # Anchor test suite (TypeScript)
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── fixtures/                      # Test data + mock oracle feeds
+│   │   ├── mock_oracle.ts
+│   │   └── mock_palm_usd.ts
+│   ├── 01_initialize_vault.test.ts
+│   ├── 02_create_slab.test.ts
+│   ├── 03_mint_etf.test.ts
+│   ├── 04_redeem_etf.test.ts
+│   ├── 05_open_perp.test.ts
+│   ├── 06_close_perp.test.ts
+│   ├── 07_funding_settlement.test.ts
+│   ├── 08_lp_deposit_withdraw.test.ts
+│   ├── 09_revenue_distribution.test.ts
+│   ├── 10_oracle_circuit_breaker.test.ts
+│   ├── 11_ak_scaling.test.ts
+│   └── 12_bundle_simulation.test.ts
 │
-├── 📁 apps/
-│   └── 📁 web/                           # Next.js 14 Frontend
-│       ├── 📄 package.json
-│       ├── 📄 next.config.js
-│       ├── 📄 tailwind.config.ts
-│       ├── 📄 tsconfig.json
-│       ├── 📁 public/
-│       │   ├── 📄 logo.svg
-│       │   └── 📄 favicon.ico
-│       └── 📁 src/
-│           ├── 📁 app/                   # Next.js App Router
-│           │   ├── 📄 layout.tsx
-│           │   ├── 📄 page.tsx           # Landing / Dashboard
-│           │   ├── 📁 indices/
-│           │   │   ├── 📄 page.tsx       # Browse all indices
-│           │   │   └── 📁 [slabId]/
-│           │   │       └── 📄 page.tsx   # Individual index page
-│           │   ├── 📁 create/
-│           │   │   └── 📄 page.tsx       # Create new index
-│           │   ├── 📁 trade/
-│           │   │   └── 📄 page.tsx       # Perp trading interface
-│           │   ├── 📁 portfolio/
-│           │   │   └── 📄 page.tsx       # Encrypted user portfolio
-│           │   └── 📁 earn/
-│           │       └── 📄 page.tsx       # LP deposit / earn yield
+├── apps/
+│   └── web/                           # Next.js 14 Frontend
+│       ├── package.json
+│       ├── next.config.js
+│       ├── tailwind.config.ts
+│       ├── tsconfig.json
+│       ├── public/
+│       │   ├── logo.svg
+│       │   └── favicon.ico
+│       └── src/
+│           ├── app/                   # Next.js App Router
+│           │   ├── layout.tsx
+│           │   ├── page.tsx           # Landing / Dashboard
+│           │   ├── indices/
+│           │   │   ├── page.tsx       # Browse all indices
+│           │   │   └── [slabId]/
+│           │   │       └── page.tsx   # Individual index page
+│           │   ├── create/
+│           │   │   └── page.tsx       # Create new index
+│           │   ├── trade/
+│           │   │   └── page.tsx       # Perp trading interface
+│           │   ├── portfolio/
+│           │   │   └── page.tsx       # Encrypted user portfolio
+│           │   └── earn/
+│           │       └── page.tsx       # LP deposit / earn yield
 │           │
-│           ├── 📁 components/
-│           │   ├── 📁 layout/
-│           │   │   ├── 📄 Navbar.tsx
-│           │   │   └── 📄 Footer.tsx
-│           │   ├── 📁 swap/
-│           │   │   └── 📄 JupiterSwapWidget.tsx  # Jupiter → Palm USD
-│           │   ├── 📁 index/
-│           │   │   ├── 📄 IndexCard.tsx
-│           │   │   ├── 📄 IndexComposition.tsx
-│           │   │   ├── 📄 MintRedeemPanel.tsx
-│           │   │   └── 📄 NAVChart.tsx
-│           │   ├── 📁 perp/
-│           │   │   ├── 📄 PerpTradePanel.tsx
-│           │   │   ├── 📄 RiskMeter.tsx          # Hides "skew" from users
-│           │   │   ├── 📄 ExpectedAPY.tsx        # Hides "funding rate"
-│           │   │   └── 📄 PositionCard.tsx
-│           │   ├── 📁 portfolio/
-│           │   │   ├── 📄 EncryptedPortfolio.tsx
-│           │   │   └── 📄 PositionHistory.tsx
-│           │   ├── 📁 earn/
-│           │   │   ├── 📄 LPDepositPanel.tsx
-│           │   │   └── 📄 YieldDashboard.tsx
-│           │   └── 📁 ui/                        # Shared UI primitives
-│           │       ├── 📄 Button.tsx
-│           │       ├── 📄 Modal.tsx
-│           │       ├── 📄 Toast.tsx
-│           │       └── 📄 Badge.tsx
+│           ├── components/
+│           │   ├── layout/
+│           │   │   ├── Navbar.tsx
+│           │   │   └── Footer.tsx
+│           │   ├── swap/
+│           │   │   └── JupiterSwapWidget.tsx  # Jupiter → Palm USD
+│           │   ├── index/
+│           │   │   ├── IndexCard.tsx
+│           │   │   ├── IndexComposition.tsx
+│           │   │   ├── MintRedeemPanel.tsx
+│           │   │   └── NAVChart.tsx
+│           │   ├── perp/
+│           │   │   ├── PerpTradePanel.tsx
+│           │   │   ├── RiskMeter.tsx          # Hides "skew" from users
+│           │   │   ├── ExpectedAPY.tsx        # Hides "funding rate"
+│           │   │   └── PositionCard.tsx
+│           │   ├── portfolio/
+│           │   │   ├── EncryptedPortfolio.tsx
+│           │   │   └── PositionHistory.tsx
+│           │   ├── earn/
+│           │   │   ├── LPDepositPanel.tsx
+│           │   │   └── YieldDashboard.tsx
+│           │   └── ui/                        # Shared UI primitives
+│           │       ├── Button.tsx
+│           │       ├── Modal.tsx
+│           │       ├── Toast.tsx
+│           │       └── Badge.tsx
 │           │
-│           ├── 📁 hooks/
-│           │   ├── 📄 usePercorium.ts    # Main protocol hook
-│           │   ├── 📄 useSlabs.ts        # Fetch + subscribe to slabs
-│           │   ├── 📄 useUserPosition.ts # Decrypt + display user position
-│           │   ├── 📄 useNAV.ts          # Real-time NAV feed
-│           │   └── 📄 useJitoBundle.ts   # Bundle simulation + submission
+│           ├── hooks/
+│           │   ├── usePercorium.ts    # Main protocol hook
+│           │   ├── useSlabs.ts        # Fetch + subscribe to slabs
+│           │   ├── useUserPosition.ts # Decrypt + display user position
+│           │   ├── useNAV.ts          # Real-time NAV feed
+│           │   └── useJitoBundle.ts   # Bundle simulation + submission
 │           │
-│           └── 📁 lib/
-│               ├── 📄 anchor-client.ts   # Anchor IDL + provider setup
-│               ├── 📄 constants.ts       # Program IDs, PDAs, mint addresses
-│               └── 📄 utils.ts           # Formatting helpers
+│           └── lib/
+│               ├── anchor-client.ts   # Anchor IDL + provider setup
+│               ├── constants.ts       # Program IDs, PDAs, mint addresses
+│               └── utils.ts           # Formatting helpers
 │
-├── 📁 packages/
-│   ├── 📁 sdk/                           # Percorium TypeScript SDK
-│   │   ├── 📄 package.json
-│   │   ├── 📄 tsconfig.json
-│   │   ├── 📁 src/
-│   │   │   ├── 📄 index.ts
-│   │   │   ├── 📄 client.ts             # PercoriumClient class
-│   │   │   ├── 📁 instructions/         # Instruction builders
-│   │   │   │   ├── 📄 vault.ts
-│   │   │   │   ├── 📄 slab.ts
-│   │   │   │   ├── 📄 etf.ts
-│   │   │   │   └── 📄 perp.ts
-│   │   │   ├── 📁 types/                # Shared TypeScript types
-│   │   │   │   └── 📄 index.ts
-│   │   │   └── 📄 idl.ts                # Auto-generated Anchor IDL types
-│   │   └── 📄 README.md
+├── packages/
+│   ├── sdk/                           # Percorium TypeScript SDK
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── client.ts             # PercoriumClient class
+│   │   │   ├── instructions/         # Instruction builders
+│   │   │   │   ├── vault.ts
+│   │   │   │   ├── slab.ts
+│   │   │   │   ├── etf.ts
+│   │   │   │   └── perp.ts
+│   │   │   ├── types/                # Shared TypeScript types
+│   │   │   │   └── index.ts
+│   │   │   └── idl.ts                # Auto-generated Anchor IDL types
+│   │   └── README.md
 │   │
-│   ├── 📁 jito-client/                   # Jito bundle client
-│   │   ├── 📄 package.json
-│   │   └── 📁 src/
-│   │       ├── 📄 index.ts
-│   │       ├── 📄 bundle.ts             # Bundle construction + simulation
-│   │       └── 📄 optimize.ts           # CU optimization logic
+│   ├── jito-client/                   # Jito bundle client
+│   │   ├── package.json
+│   │   └── src/
+│   │       ├── index.ts
+│   │       ├── bundle.ts             # Bundle construction + simulation
+│   │       └── optimize.ts           # CU optimization logic
 │   │
-│   └── 📁 oracle-client/                 # Switchboard oracle client
-│       ├── 📄 package.json
-│       └── 📁 src/
-│           ├── 📄 index.ts
-│           ├── 📄 switchboard.ts        # TEE function requests
-│           └── 📄 feeds.ts              # Pyth + Chainlink feed addresses
+│   └── oracle-client/                 # Switchboard oracle client
+│       ├── package.json
+│       └── src/
+│           ├── index.ts
+│           ├── switchboard.ts        # TEE function requests
+│           └── feeds.ts              # Pyth + Chainlink feed addresses
 │
-├── 📁 scripts/                           # Deployment + admin scripts
-│   ├── 📄 deploy-devnet.sh
-│   ├── 📄 initialize-vault.ts
-│   ├── 📄 create-sample-slabs.ts        # Seed SP500 + Nasdaq100 slabs
-│   ├── 📄 setup-luts.ts                 # Address Lookup Table setup
-│   └── 📄 verify-deploy.ts
+├── scripts/                           # Deployment + admin scripts
+│   ├── deploy-devnet.sh
+│   ├── initialize-vault.ts
+│   ├── create-sample-slabs.ts        # Seed SP500 + Nasdaq100 slabs
+│   ├── setup-luts.ts                 # Address Lookup Table setup
+│   └── verify-deploy.ts
 │
-├── 📁 docs/                              # Additional documentation
-│   ├── 📄 ARCHITECTURE.md
-│   ├── 📄 MATH.md                       # Full mathematical proofs
-│   ├── 📄 CU_OPTIMIZATION.md           # Bundle + compute unit guide
-│   ├── 📄 ORACLE_GUIDE.md              # Switchboard TEE setup
-│   └── 📁 colosseum/
-│       ├── 📄 SUBMISSION.md             # Colosseum submission writeup
-│       └── 📄 BOUNTY_ALIGNMENT.md      # Encrypt + Palm USD bounty notes
+├── docs/                              # Additional documentation
+│   ├── ARCHITECTURE.md
+│   ├── MATH.md                       # Full mathematical proofs
+│   ├── CU_OPTIMIZATION.md           # Bundle + compute unit guide
+│   ├── ORACLE_GUIDE.md              # Switchboard TEE setup
+│   └── colosseum/
+│       ├── SUBMISSION.md             # Colosseum submission writeup
+│       └── BOUNTY_ALIGNMENT.md      # Encrypt + Palm USD bounty notes
 │
-└── 📁 .github/
-    ├── 📁 workflows/
-    │   ├── 📄 test.yml                  # CI: run Anchor tests on push
-    │   └── 📄 lint.yml                  # CI: Clippy + ESLint
-    └── 📄 PULL_REQUEST_TEMPLATE.md
+└── .github/
+    ├── workflows/
+    │   ├── test.yml                  # CI: run Anchor tests on push
+    │   └── lint.yml                  # CI: Clippy + ESLint
+    └── PULL_REQUEST_TEMPLATE.md
 ```
 
 ---
@@ -743,19 +743,19 @@ pnpm dev
 
 ## Coming Soon
 
-### 🗣️ Token-Gated Conviction Forums
+### Token-Gated Conviction Forums
 Private social discussion layers embedded at the footer of every index page. Access is gated by holding that specific index token. Holders share research, conviction, and alpha. No Discord. No leaks. On-chain identity, encrypted discussion, zero data harvesting.
 
-### 🏦 Isolated Lending & Borrowing
+### Isolated Lending & Borrowing
 Borrow Palm USD against your synthetic ETF position at **60% LTV**. Your ETF stays in the protocol earning NAV appreciation while you deploy the borrowed capital elsewhere. No liquidation cascades — each Slab's debt is isolated.
 
-### ⚖️ Delta-Neutral Yield Vaults
+### Delta-Neutral Yield Vaults
 Automated yield vaults that simultaneously long the Spot ETF and short the perpetual on the same index. The position is price-neutral (delta = 0) while harvesting funding rates from skewed markets. Pure yield, zero directional risk.
 
-### 🔓 Fully Permissionless Slab Creation
+### Fully Permissionless Slab Creation
 Any user will be able to deploy a new Slab PDA with custom asset weights, debt ceilings, and OI caps — no team gate. The protocol becomes a sovereign factory for custom on-chain indices. The "Sovereign" part of the vision, fully realised.
 
-### 📱 Mainnet Migration
+### Mainnet Migration
 Full audit → bug bounty → mainnet deployment. Token launch to bootstrap liquidity and governance. Community-governed protocol parameters (K constant, OI caps, revenue split).
 
 ---
@@ -785,7 +785,7 @@ This is currently a hackathon project (Colosseum Frontier 2026). Post-hackathon 
 
 ---
 
-## Built With ❤️ For
+## Built With For
 
 - **Colosseum Frontier Hackathon 2026**
 - **Superteam Bounty Tracks:** Encrypt FHE + Palm USD

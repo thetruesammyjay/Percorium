@@ -1,4 +1,4 @@
-# Security Policy
+﻿# Security Policy
 
 ## Supported Versions
 
@@ -6,8 +6,8 @@ Percorium is currently in the **Colosseum Frontier Hackathon 2026** build phase 
 
 | Version / Phase       | Supported          |
 |-----------------------|--------------------|
-| Devnet (Hackathon)    | ✅ Active          |
-| Mainnet (Post-Audit)  | 🔜 Not yet live    |
+| Devnet (Hackathon)    | Active          |
+| Mainnet (Post-Audit)  | Not yet live    |
 
 > **Note:** During the hackathon phase, no real user funds are at risk — all activity is on Solana Devnet. Bug reports are still welcome and taken seriously; they inform the pre-mainnet audit and bug bounty programme.
 
@@ -47,7 +47,7 @@ Please provide as much of the following as possible:
 
 Percorium uses a four-tier severity model aligned with the CVSS framework, adapted for on-chain DeFi protocols:
 
-### 🔴 Critical
+### Critical
 Direct, exploitable loss of user funds or protocol solvency. Examples:
 - Draining the Global House Vault or any Slab PDA without authorization
 - Minting synthetic ETF tokens without depositing Palm USD collateral
@@ -57,7 +57,7 @@ Direct, exploitable loss of user funds or protocol solvency. Examples:
 
 **Response:** Devnet pause + immediate patch. Post-mainnet: protocol freeze, coordinated fix, full post-mortem.
 
-### 🟠 High
+### High
 Significant financial risk or privilege escalation with non-trivial preconditions. Examples:
 - Bypassing the 24-hour LP withdrawal cooldown without exploiting it for oracle manipulation
 - Draining the Insurance Fund PDA without triggering the intended ADL flow
@@ -66,7 +66,7 @@ Significant financial risk or privilege escalation with non-trivial precondition
 
 **Response:** Patch within 72 hours.
 
-### 🟡 Medium
+### Medium
 Disruption to protocol operation or user privacy without direct fund loss. Examples:
 - Griefing attacks that cause Jito bundles to fail repeatedly for targeted users
 - Leaking FHE-encrypted position metadata through side-channel emissions in transaction logs
@@ -75,7 +75,7 @@ Disruption to protocol operation or user privacy without direct fund loss. Examp
 
 **Response:** Patch within 14 days.
 
-### 🟢 Low / Informational
+### Low / Informational
 Minor issues, best-practice deviations, or theoretical attack vectors with negligible real-world impact. Examples:
 - Minor discrepancies in NAV calculation math with no exploitable consequence
 - Missing input validation on non-critical instruction parameters
